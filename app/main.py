@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Dictionary:
     def __init__(self, capacity: int = 8, load_factor: float = 2 / 3) -> None:
         self.capacity = capacity
@@ -5,7 +8,7 @@ class Dictionary:
         self.size = 0
         self.table = [None] * self.capacity
 
-    def __setitem__(self, key: int, value: any) -> None:
+    def __setitem__(self, key: Any, value: Any) -> None:
         hash_key = hash(key)
         index = hash_key % self.capacity
         if self.table[index] is None:
@@ -36,7 +39,7 @@ class Dictionary:
         self.table = new_table
         self.capacity = new_capacity
 
-    def __getitem__(self, key: int) -> None:
+    def __getitem__(self, key: Any) -> Any:
         hash_key = hash(key)
         index = hash_key % self.capacity
         if self.table[index] is None:
@@ -45,7 +48,7 @@ class Dictionary:
         for k, v in self.table[index]:
             if k == key:
                 return v
-        raise KeyError
+        raise KeyError(f"{key} key is not found")
 
     def __len__(self) -> int:
         return self.size
